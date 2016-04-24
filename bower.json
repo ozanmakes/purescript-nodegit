@@ -1,0 +1,20 @@
+{
+  "name": "purescript-nodegit",
+  "version": "0.0.1",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-console": "^0.1.0",
+    "purescript-aff": "^0.16.1",
+    "purescript-unsafe-coerce": "^0.1.0",
+    "purescript-functions": "^0.1.0",
+    "purescript-datetime": "^0.9.2"
+  }
+}
