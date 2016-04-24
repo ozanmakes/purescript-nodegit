@@ -10,6 +10,14 @@ exports.open = function (path) {
   }
 }
 
+exports.getBranchCommit = function (name) {
+  return function (repo) {
+    return function (success, error) {
+      repo.getBranchCommit(name).done(success, error)
+    }
+  }
+}
+
 exports.getHeadCommit = function (repo) {
   return function (success, error) {
     repo.getHeadCommit().done(success, error)
@@ -25,5 +33,11 @@ exports.getMasterCommit = function (repo) {
 exports.getStatus = function (repo) {
   return function (success, error) {
     repo.getStatus().done(success, error)
+  }
+}
+
+exports.head = function (repo) {
+  return function (success, error) {
+    repo.head().done(success, error)
   }
 }

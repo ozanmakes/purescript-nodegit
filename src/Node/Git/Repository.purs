@@ -6,15 +6,23 @@ import Data.Function (runFn0)
 import Control.Monad.Aff (Aff)
 import Unsafe.Coerce (unsafeCoerce)
 
+import Node.Git (Git)
 import Node.Git.Commit (Commit)
+import Node.Git.Reference (Reference)
 import Node.Git.Status (StatusFile)
 
 foreign import data Repository :: *
 
-foreign import data Git :: !
-
 foreign import open
   :: forall eff. String -> Aff (git :: Git | eff) Repository
+
+-- | Look up a branch's most recent commit.
+foreign import getBranchCommit
+  :: forall eff. String -> Repository -> Aff (git :: Git | eff) Commit
+
+-- | Gets the branch that HEAD currently points to. Alias for `head`.
+getCurrentBranch :: forall eff. Repository -> Aff (git :: Git | eff) Reference
+getCurrentBranch = head
 
 -- | Retrieves the commit that HEAD is currently pointing to.
 foreign import getHeadCommit
@@ -27,6 +35,10 @@ foreign import getMasterCommit
 -- | Gets the status of a repo to it's working directory.
 foreign import getStatus
   :: forall eff. Repository -> Aff (git :: Git | eff) (Array StatusFile)
+
+-- | Gets the branch that HEAD currently points to.
+foreign import head
+  :: forall eff. Repository -> Aff (git :: Git | eff) Reference
 
 -- | Returns true if the repository is in the APPLY_MAILBOX or
 -- | APPLY_MAILBOX_OR_REBASE state.
